@@ -27,36 +27,36 @@ describe("Ship Class", () => {
 });
 
 // Gameboard tests
-import { Gameboard } from "./class.js";
+import { GameBoard } from "./class.js";
+describe("GameBoard Class", () => {
+  const gameboard = new GameBoard();
 
-describe("Gameboard Class", () => {
-  test("should be created with correct default values", () => {
-    const board = new Gameboard();
-
-    expect(board.grid.length).toBe(10);
-    board.grid.forEach((row) => expect(row.length).toBe(10));
-
-    expect(board.shipCoords).toEqual(new Map());
-    expect(board.misses).toEqual([]);
+  test("is created", () => {
+    expect(gameboard.misses).toEqual([]);
+    expect(gameboard.ships).toEqual([]);
+    expect(gameboard.shipCoords).toEqual(new Map());
   });
 
-  test("placeShip works", () => {
-    const board = new Gameboard();
-    board.placeShip(4, [3, 2], "vertical");
+  test("places ships", () => {
+    gameboard.placeShip(4, "vertical", [5, 5]);
 
-    const shipKeys = Array.from(board.shipCoords.keys()); // Extract keys as an array
+    expect(gameboard.misses).toEqual([]);
+    expect(gameboard.ships).toEqual([
+      { length: 4, timesHit: 0, isSunk: false, hitCoords: [] },
+    ]);
 
-    expect(shipKeys).toEqual(
-      expect.arrayContaining(["3,3", "3,4", "3,4", "3,5"])
-    );
-  });
+    // Checking the shipCoords Map
+    expect(gameboard.shipCoords.size).toBe(4);
 
-  test("receiveAttack hits ship", () => {
-    const board = new Gameboard();
-    board.placeShip(4, [3, 2], "vertical");
+    expect(gameboard.shipCoords.has("5,5")).toBe(true);
+    expect(gameboard.shipCoords.has("5,6")).toBe(true);
+    expect(gameboard.shipCoords.has("5,7")).toBe(true);
+    expect(gameboard.shipCoords.has("5,8")).toBe(true);
 
-    board.receiveAttack(3, 3);
-
-    expect(board.ships[0].timesHit).toBe(1);
+    const ship = gameboard.ships[0];
+    expect(gameboard.shipCoords.get("5,5")).toBe(ship);
+    expect(gameboard.shipCoords.get("5,6")).toBe(ship);
+    expect(gameboard.shipCoords.get("5,7")).toBe(ship);
+    expect(gameboard.shipCoords.get("5,8")).toBe(ship);
   });
 });

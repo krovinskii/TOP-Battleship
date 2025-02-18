@@ -3,6 +3,7 @@ export class Ship {
     this.length = length;
     this.timesHit = 0;
     this.isSunk = false;
+    this.hitCoords = [];
   }
   hit() {
     this.timesHit++;
@@ -12,31 +13,33 @@ export class Ship {
     return this.timesHit;
   }
 }
-export class Gameboard {
+export class GameBoard {
   constructor() {
-    this.grid = Array(10)
-      .fill(null)
-      .map(() => Array(10).fill(null));
-    this.shipCoords = new Map();
     this.misses = [];
+    this.ships = [];
+    this.shipCoords = new Map();
   }
-  placeShip(length, startingPoint, direction) {
-    const ship = new Ship(length);
-    this.ships.push(ship);
-    let x = startingPoint[0];
-    let y = startingPoint[1];
+  placeShip(length, direction, coords) {
+    const newShip = new Ship(length);
+    this.ships.push(newShip);
+    const x = coords[0];
+    const y = coords[1];
 
-    for (let i = 0; i < length; i++) {
-      this.shipCoords.set(`${x},${y}`, ship);
-
-      if (direction === "horizontal") {
-        x++;
-      } else if (direction === "vertical") {
-        y++;
+    if (direction.toLowerCase() === "vertical") {
+      for (let i = 0; i < length; i++) {
+        const coordKey = `${x},${y + i}`;
+        this.shipCoords.set(coordKey, newShip);
+      }
+    } else if (direction.toLowerCase() === "horizontal") {
+      for (let i = 0; i < length; i++) {
+        const coordKey = `${x + i},${y}`;
+        this.shipCoords.set(coordKey, newShip);
       }
     }
-  }
 
-  receiveAttack(x, y) {}
-  allSunk() {}
+    return newShip;
+  }
 }
+const game = new GameBoard();
+game.placeShip(4, "vertical", [5, 5]);
+console.log(game);
