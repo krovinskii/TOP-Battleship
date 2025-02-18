@@ -39,6 +39,18 @@ export class GameBoard {
 
     return newShip;
   }
+  receiveAttack(coords) {
+    const coordKey = `${coords[0]},${coords[1]}`;
+
+    if (this.shipCoords.has(coordKey)) {
+      const ship = this.shipCoords.get(coordKey);
+      ship.hit();
+      return "hit";
+    } else {
+      this.misses.push(coordKey);
+      return "miss";
+    }
+  }
 }
 
 export class Player {

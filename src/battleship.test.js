@@ -60,6 +60,36 @@ describe("GameBoard Class", () => {
     expect(gameboard.shipCoords.get("5,8")).toBe(ship);
   });
 });
+describe("GameBoard hit function", () => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new GameBoard();
+    gameboard.placeShip(3, "horizontal", [2, 2]);
+  });
+
+  test("registers a hit", () => {
+    expect(gameboard.receiveAttack([2, 2])).toBe("hit");
+
+    const ship = gameboard.shipCoords.get("2,2");
+    expect(ship.timesHit).toBe(1);
+    expect(ship.isSunk).toBe(false);
+  });
+
+  test("registers a miss", () => {
+    expect(gameboard.receiveAttack([5, 5])).toBe("miss");
+    expect(gameboard.misses).toContain("5,5");
+  });
+
+  test("sinks a ship after enough hits", () => {
+    gameboard.receiveAttack([2, 2]);
+    gameboard.receiveAttack([3, 2]);
+    gameboard.receiveAttack([4, 2]);
+
+    const ship = gameboard.shipCoords.get("2,2");
+    expect(ship.isSunk).toBe(true);
+  });
+});
 
 // Player Tests
 import { Player } from "./class.js";
