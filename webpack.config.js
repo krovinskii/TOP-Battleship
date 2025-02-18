@@ -1,22 +1,33 @@
-// webpack.config.js
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default {
   mode: "development",
   entry: "./src/index.js",
   output: {
-    filename: "main.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   devtool: "eval-source-map",
   devServer: {
+    static: "./dist",
     watchFiles: ["./src/index.html"],
+    hot: true,
+    open: true,
+    port: 8080,
+    host: "localhost",
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: "Battleship",
       template: "./src/index.html",
+      filename: "index.html",
     }),
   ],
   module: {
@@ -33,6 +44,13 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
     ],
+  },
+  optimization: {
+    runtimeChunk: "single",
   },
 };
