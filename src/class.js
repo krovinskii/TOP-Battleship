@@ -40,6 +40,10 @@ export class GameBoard {
     return newShip;
   }
 }
-const game = new GameBoard();
-game.placeShip(4, "vertical", [5, 5]);
-console.log(game);
+
+export class Player {
+  constructor(type) {
+    this.gameboard = new GameBoard();
+    this.type = type; //type will be human or computer
+  }
+}

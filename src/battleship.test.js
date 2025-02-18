@@ -60,3 +60,17 @@ describe("GameBoard Class", () => {
     expect(gameboard.shipCoords.get("5,8")).toBe(ship);
   });
 });
+
+// Player Tests
+import { Player } from "./class.js";
+describe("Player Class", () => {
+  const player = new Player();
+
+  test("is created with a gameboard", () => {
+    expect(player.gameboard).toBeInstanceOf(GameBoard);
+    expect(player.gameboard.misses).toEqual([]);
+    expect(player.gameboard.ships).toEqual([]);
+    expect(player.gameboard.shipCoords).toBeInstanceOf(Map);
+    expect(player.gameboard.shipCoords.size).toBe(0);
+  });
+});
