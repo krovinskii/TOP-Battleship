@@ -1,3 +1,131 @@
+@font-face {
+  font-family: "Army";
+  src: url(fonts/armyrangers.woff);
+}
+
 * {
-  background-color: aquamarine;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Army";
+}
+
+body {
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.startGame {
+  height: 80%;
+  width: 80%;
+  max-height: 900px;
+  max-width: 1440px;
+  background-color: rgb(240, 247, 253);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.startGame-header {
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.5rem;
+  align-items: center;
+  gap: 3rem;
+}
+.logoSVG {
+  height: 8rem;
+}
+
+.startGame-header-text {
+  color: black;
+  font-size: 4rem;
+}
+
+.playerSetup {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.25rem;
+}
+.playerSelector {
+  display: flex;
+  gap: 1rem;
+}
+
+.playerNameField {
+  height: 2rem;
+  width: 20rem;
+  text-align: center;
+}
+
+.playerPCSVG {
+  height: 8rem;
+}
+.humanLabel {
+  margin-right: 2rem;
+}
+.flipped {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.startGameBtnContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-36 {
+  background-image: linear-gradient(
+    92.88deg,
+    #455eb5 9.16%,
+    #5643cc 43.89%,
+    #673fd7 64.72%
+  );
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all 0.5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-36:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: 0.1s;
+}
+
+@media (min-width: 768px) {
+  .button-36 {
+    padding: 0 2.6rem;
+  }
 }

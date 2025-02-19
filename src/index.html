@@ -5,5 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
   </head>
-  <body></body>
+  <body>
+    <div class="startGame">
+      <div class="startGame-header">
+        <img src="./img/battleshipMain.svg" class="logoSVG" />
+        <div class="startGame-header-text">BattleShip</div>
+        <img src="./img/battleshipMain.svg" class="logoSVG flipped" />
+      </div>
+      <div class="playerSetup">
+        <!--Player Side-->
+        <div class="player">
+          <img src="img/human.svg" class="playerPCSVG flipped" />
+          <div class="playerName">
+            <input
+              type="text"
+              id="playerNameField"
+              class="playerNameField"
+              placeholder="Player"
+            />
+          </div>
+          <div class="playerSelector">
+            <input type="checkbox" id="playerSelector" checked />
+            <label for="playerSelector">Human</label>
+          </div>
+        </div>
+        <!--PC / Second Player Side-->
+        <div class="player">
+          <img src="img/human.svg" class="playerPCSVG" />
+          <div class="playerName">
+            <input
+              type="text"
+              id="player2NameField"
+              class="playerNameField"
+              placeholder="Second Player / Computer"
+            />
+          </div>
+          <div class="playerSelector">
+            <input type="checkbox" id="playerSelector" />
+            <label for="playerSelector" class="humanLabel">Human</label>
+            <input type="checkbox" id="computerSelector" />
+            <label for="computerSelector">Computer</label>
+          </div>
+        </div>
+      </div>
+      <!--Start Game-->
+      <div class="startGameBtnContainer">
+        <button class="button-36">Start Game</button>
+      </div>
+    </div>
+  </body>
 </html>
