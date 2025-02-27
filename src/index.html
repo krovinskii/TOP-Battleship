@@ -3,7 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Battleship</title>
   </head>
-  <body></body>
+  <body>
+    <div class="startPageContainer">
+      <img alt="battleship picture" src="imgs/battleship.webp" />
+      <div class="startPageText">BattleShip</div>
+      <div class="player1">
+        <label for="player1Name">Player 1</label>
+        <input type="text" id="player1Name" />
+      </div>
+      <div class="player2">
+        <label for="player2Name">Player 2</label>
+        <input type="text" id="player2Name" class="player2NameInput" />
+        <div class="checkboxContainer">
+          <input type="checkbox" id="player2Human" />
+          <label class="player2Human" for="player2Human">Human</label>
+          <input type="checkbox" id="player2AI" />
+          <label for="player2AI">AI</label>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="startGameBtn button-26">Play</button>
+        <button class="instructionsBtn">How to Play?</button>
+      </div>
+    </div>
+  </body>
 </html>
