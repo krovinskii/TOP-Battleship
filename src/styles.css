@@ -14,7 +14,10 @@
   box-sizing: border-box;
   font-family: "Bebas", Arial, Helvetica, sans-serif;
 }
-
+/*---------------------Utility----------------------*/
+.battleshipFont {
+  font-family: "Army";
+}
 body {
   min-height: 100%;
   background-color: rgb(58, 77, 77);
@@ -31,9 +34,10 @@ body {
   max-height: 700px;
   max-width: 600px;
   background-color: white;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 .startPageContainer img {
   height: 40%;
@@ -98,7 +102,6 @@ body {
 }
 .startGameBtn,
 .instructionsBtn {
-  /* Apply button-26 styles */
   appearance: button;
   background-color: #1652f0;
   border: 1px solid #1652f0;
@@ -119,7 +122,6 @@ body {
   touch-action: manipulation;
   width: fit-content;
 
-  /* Set custom height and width */
   height: 4rem;
   width: 10rem;
 }
@@ -144,4 +146,48 @@ body {
 .instructionsBtn:active {
   background-color: #0039d7;
   border-color: #0039d7;
+}
+
+/* || -----------------------Game Screen-------------------*/
+.gameContainer {
+  height: 80vh;
+  width: 80vw;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  gap: 1rem;
+}
+.gameHeaderText h1 {
+  letter-spacing: 0.25rem;
+  font-size: 3rem;
+}
+.gameBoards {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+.board1,
+.board2 {
+  height: 50%;
+  width: 100%;
+  max-width: 720px;
+  background-color: #e7eeff;
+}
+.gameInfo {
+  display: flex;
+  height: fit-content;
+  width: 66%;
+  max-width: 720px;
+
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+.playerGameInfo {
+  font-size: 1.5rem;
 }
