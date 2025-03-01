@@ -6,7 +6,7 @@
     <title>Battleship</title>
   </head>
   <body>
-    <div class="startPageContainer">
+    <div class="startPageContainer" id="startPageContainer">
       <img alt="battleship picture" src="imgs/battleship.webp" />
       <div class="startPageText">BattleShip</div>
       <div class="player1">
@@ -24,9 +24,9 @@
         </div>
       </div>
       <div class="btns">
-        <button class="startGameBtn button-26">Play</button>
+        <button class="startGameBtn button-26" id="playGameBtn">Play</button>
         <!--Instructions-->
-        <dialog>
+        <dialog id="instructionsModal">
           <ol>
             <li>
               <strong>Step 1:</strong> Enter Player Names & Select Opponent Type
@@ -98,12 +98,15 @@
               </ul>
             </li>
           </ol>
+          <button class="instructionsBtn" id="modalExitBtn">Exit</button>
         </dialog>
-        <button class="instructionsBtn">How to Play?</button>
+        <button class="instructionsBtn" id="instructionsBtn">
+          How to Play?
+        </button>
       </div>
     </div>
     <!--Game Screen-->
-    <div class="gameContainer">
+    <div class="gameContainer" id="gameContainer">
       <div class="gameHeader">
         <div class="gameHeaderText">
           <h1 class="battleshipFont">BattleShip</h1>
