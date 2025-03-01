@@ -210,15 +210,18 @@ dialog ol {
 }
 li strong {
   font-size: 2rem;
+  color: #000000;
 }
 ol li {
   list-style-type: none;
+  color: #0039d7;
 }
 li {
   font-size: 1.5rem;
 }
 ul li {
   font-size: 1rem;
+  color: #001b66;
 }
 ul li:last-child {
   margin-bottom: 3rem;
@@ -233,4 +236,8 @@ dialog::backdrop {
   -o-filter: blur(2px);
   -ms-filter: blur(2px);
   filter: blur(2px);
+}
+.errorDiv {
+  color: red;
+  font-size: 2rem;
 }
