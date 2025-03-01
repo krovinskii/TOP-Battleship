@@ -1,5 +1,6 @@
 import { Ship } from "../classes";
 import { Gameboard } from "../classes";
+import { Player } from "../classes";
 // || --------------------------Ship Class-----------------------//
 describe("Ship Class", () => {
   const dookieShip = new Ship(4);
@@ -48,5 +49,16 @@ describe("Gameboard Class", () => {
     //Miss
     game.receiveAttack([5, 5]);
     expect(game.misses).toEqual([[5, 5]]);
+  });
+});
+// || --------------------------Player Class------------------//
+describe("Player Class", () => {
+  const player = new Player("human");
+  const player2 = new Player("AI");
+  it("is created", () => {
+    expect(player.type).toEqual("human");
+    expect(player2.type).toEqual("AI");
+    expect(player.game).toBeInstanceOf(Gameboard);
+    expect(player2.game).toBeInstanceOf(Gameboard);
   });
 });
