@@ -36,4 +36,17 @@ describe("Gameboard Class", () => {
       ["0,3", expect.objectContaining({ length: 4, timesHit: 0, sunk: false })],
     ]);
   });
+  test("receiveAttack", () => {
+    game.placeShip(4, "vertical", [0, 0]);
+    game.receiveAttack([0, 0]);
+    expect([...game.shipLocations.entries()]).toEqual([
+      ["0,0", expect.objectContaining({ length: 4, timesHit: 1, sunk: false })],
+      ["0,1", expect.objectContaining({ length: 4, timesHit: 1, sunk: false })],
+      ["0,2", expect.objectContaining({ length: 4, timesHit: 1, sunk: false })],
+      ["0,3", expect.objectContaining({ length: 4, timesHit: 1, sunk: false })],
+    ]);
+    //Miss
+    game.receiveAttack([5, 5]);
+    expect(game.misses).toEqual([[5, 5]]);
+  });
 });

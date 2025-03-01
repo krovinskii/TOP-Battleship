@@ -48,4 +48,28 @@ export class Gameboard {
       }
     }
   }
+  receiveAttack(attackCoord) {
+    const key = `${attackCoord[0]},${attackCoord[1]}`;
+
+    if (this.misses.some((miss) => miss.toString() === key)) {
+      return false;
+    }
+
+    if (this.shipLocations.has(key)) {
+      const ship = this.shipLocations.get(key);
+      ship.isHit();
+
+      if (ship.isSunk()) {
+        for (let [location, s] of this.shipLocations.entries()) {
+          if (s === ship) {
+            this.shipLocations.set(location, ship);
+          }
+        }
+      }
+      return true;
+    } else {
+      this.misses.push(attackCoord);
+      return false;
+    }
+  }
 }
