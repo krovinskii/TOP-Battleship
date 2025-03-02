@@ -177,6 +177,9 @@ body {
   width: 100%;
   max-width: 720px;
   background-color: #e7eeff;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
 }
 .gameInfo {
   display: flex;
@@ -240,4 +243,8 @@ dialog::backdrop {
 .errorDiv {
   color: red;
   font-size: 2rem;
+}
+.gridCell {
+  color: black;
+  border: 1px solid black;
 }

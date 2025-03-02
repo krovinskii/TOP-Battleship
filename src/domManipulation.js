@@ -12,6 +12,14 @@ export const addElement = {
       createdDiv.className = "errorDiv";
     }
   },
+  addGrid: (cells, target) => {
+    for (let i = 0; i <= cells; i++) {
+      const div = document.createElement("div");
+      div.id = i;
+      div.className = "gridCell";
+      target.appendChild(div);
+    }
+  },
 };
 export const textManipulation = {
   changeText: (location, changeTo) => {

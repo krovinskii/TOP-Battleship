@@ -39,8 +39,11 @@ export const listener = {
       console.log(player1Name.value);
       textManipulation.changeText(player1NameGameScreen, player1Name.value);
       textManipulation.changeText(player2NameGameScreen, player2Name.value);
+
       elements.startPageContainer.style.display = "none";
       elements.gameContainer.style.display = "flex";
+      addElement.addGrid(100, elements.player1GridTarget);
+      addElement.addGrid(100, elements.player2GridTarget);
     });
   },
   showInstructions: () => {

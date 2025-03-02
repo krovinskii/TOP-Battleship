@@ -21,4 +21,6 @@ export const elements = {
   //-----------------Game Screen-------------------//
   player1NameGameScreen: document.getElementById("player1NameGameScreen"),
   player2NameGameScreen: document.getElementById("player2NameGameScreen"),
+  player1GridTarget: document.getElementById("playerBoard"),
+  player2GridTarget: document.getElementById("secondBoard"),
 };
