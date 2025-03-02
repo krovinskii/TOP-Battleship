@@ -13,11 +13,15 @@ export const addElement = {
     }
   },
   addGrid: (cells, target) => {
-    for (let i = 0; i <= cells; i++) {
-      const div = document.createElement("div");
-      div.id = i;
-      div.className = "gridCell";
-      target.appendChild(div);
+    const gridSize = Math.sqrt(cells);
+
+    for (let y = 0; y < gridSize; y++) {
+      for (let x = 0; x < gridSize; x++) {
+        const div = document.createElement("div");
+        div.id = `${x},${y}`;
+        div.className = "gridCell";
+        target.appendChild(div);
+      }
     }
   },
 };
