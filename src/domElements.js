@@ -15,6 +15,10 @@ export const elements = {
   player2HumanCheck: document.getElementById("player2Human").checked,
   player2AICheck: document.getElementById("player2AI").checked,
   //-----------------------------------------------//
-  //-----------------Misc----------------------------//
+  //-----------------Misc--------------------------//
   btnDiv: document.getElementById("btns"),
+  //-----------------------------------------------//
+  //-----------------Game Screen-------------------//
+  player1NameGameScreen: document.getElementById("player1NameGameScreen"),
+  player2NameGameScreen: document.getElementById("player2NameGameScreen"),
 };

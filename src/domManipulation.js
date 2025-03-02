@@ -13,3 +13,10 @@ export const addElement = {
     }
   },
 };
+export const textManipulation = {
+  changeText: (location, changeTo) => {
+    location.innerText = changeTo;
+    console.log(`location: ${location}`);
+    console.log(`changeTo: ${changeTo}`);
+  },
+};

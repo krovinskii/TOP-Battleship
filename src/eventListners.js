@@ -1,6 +1,7 @@
 import { elements } from "./domElements";
 import { validate } from "./validation";
 import { addElement } from "./domManipulation";
+import { textManipulation } from "./domManipulation";
 export const listener = {
   init: () => {
     window.addEventListener("load", () => {
@@ -36,6 +37,8 @@ export const listener = {
         return;
       }
       console.log(player1Name.value);
+      textManipulation.changeText(player1NameGameScreen, player1Name.value);
+      textManipulation.changeText(player2NameGameScreen, player2Name.value);
       elements.startPageContainer.style.display = "none";
       elements.gameContainer.style.display = "flex";
     });
