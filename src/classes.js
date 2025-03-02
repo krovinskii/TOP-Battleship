@@ -34,20 +34,30 @@ export class Gameboard {
     const x = coordXY[0];
     const y = coordXY[1];
 
+    const proposedCoords = [];
+
     if (direction === "vertical") {
       for (let i = 0; i < length; i++) {
         const key = `${x},${y + i}`;
-        this.shipLocations.set(key, ship);
+        if (this.shipLocations.has(key)) return false; // Prevent overlapping
+        proposedCoords.push(key);
       }
     }
 
     if (direction === "horizontal") {
       for (let i = 0; i < length; i++) {
         const key = `${x + i},${y}`;
-        this.shipLocations.set(key, ship);
+        if (this.shipLocations.has(key)) return false; // Prevent overlapping
+        proposedCoords.push(key);
       }
     }
+
+    // If no overlaps, place the ship
+    proposedCoords.forEach((key) => this.shipLocations.set(key, ship));
+
+    return true;
   }
+
   receiveAttack(attackCoord) {
     const key = `${attackCoord[0]},${attackCoord[1]}`;
 
