@@ -25,5 +25,6 @@ export const initGame = (player1, player2) => {
       randomCoords()
     );
   }
+
   return { player1Board, player2Board };
 };

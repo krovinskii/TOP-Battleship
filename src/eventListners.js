@@ -2,6 +2,8 @@ import { elements } from "./domElements";
 import { validate } from "./validation";
 import { addElement } from "./domManipulation";
 import { textManipulation } from "./domManipulation";
+import { initGame } from "./gameLogic";
+import { place } from "./domManipulation";
 export const listener = {
   init: () => {
     window.addEventListener("load", () => {
@@ -39,11 +41,20 @@ export const listener = {
       console.log(player1Name.value);
       textManipulation.changeText(player1NameGameScreen, player1Name.value);
       textManipulation.changeText(player2NameGameScreen, player2Name.value);
-
       elements.startPageContainer.style.display = "none";
       elements.gameContainer.style.display = "flex";
+
+      // Create the grids
       addElement.addGrid(100, elements.player1GridTarget);
       addElement.addGrid(100, elements.player2GridTarget);
+
+      // Initialize game and place ships AFTER grids are created
+      const game = initGame();
+      place.ships(game.player1Board, game.player2Board);
+      console.log(game.player1Board);
+      console.log(game.player2Board);
+
+      console.log("Game initialized and ships placed on board");
     });
   },
   showInstructions: () => {

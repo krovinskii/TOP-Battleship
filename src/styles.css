@@ -248,3 +248,6 @@ dialog::backdrop {
   color: black;
   border: 1px solid black;
 }
+.ship-cell {
+  background-color: #000000;
+}

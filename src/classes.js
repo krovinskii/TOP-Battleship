@@ -30,6 +30,8 @@ export class Gameboard {
   }
 
   placeShip(length, direction, coordXY) {
+    //BUG!
+    //the subsequential coords after first placement need to be checked if they are more than 9. If so, ship needs to be done again because this pushes us out of bounds
     const ship = new Ship(length);
     const x = coordXY[0];
     const y = coordXY[1];

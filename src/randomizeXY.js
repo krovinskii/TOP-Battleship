@@ -1,7 +1,7 @@
 //Randomizes [x. y]
 export const randomCoords = () => {
-  const randomX = Math.floor(Math.random() * 10);
-  const randomY = Math.floor(Math.random() * 10);
+  const randomX = Math.floor(Math.random() * 9);
+  const randomY = Math.floor(Math.random() * 9);
   return [randomX, randomY];
 };
 
