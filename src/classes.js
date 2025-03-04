@@ -28,36 +28,69 @@ export class Gameboard {
     this.misses = [];
     this.allSunk = false;
   }
+  placeShip(length, direction) {
+    const maxAttempts = 100; // Prevent infinite loops
+    let attempts = 0;
 
-  placeShip(length, direction, coordXY) {
-    //BUG!
-    //the subsequential coords after first placement need to be checked if they are more than 9. If so, ship needs to be done again because this pushes us out of bounds
-    const ship = new Ship(length);
-    const x = coordXY[0];
-    const y = coordXY[1];
+    while (attempts < maxAttempts) {
+      // Generate random coordinates
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const coordXY = [x, y];
 
-    const proposedCoords = [];
+      const proposedCoords = [];
 
-    if (direction === "vertical") {
-      for (let i = 0; i < length; i++) {
-        const key = `${x},${y + i}`;
-        if (this.shipLocations.has(key)) return false; // Prevent overlapping
-        proposedCoords.push(key);
+      if (direction === "vertical") {
+        if (y + length > 10) {
+          attempts++;
+          continue;
+        }
+
+        let isValidPlacement = true;
+        for (let i = 0; i < length; i++) {
+          const key = `${x},${y + i}`;
+          if (this.shipLocations.has(key)) {
+            isValidPlacement = false;
+            break;
+          }
+          proposedCoords.push(key);
+        }
+
+        if (!isValidPlacement) {
+          attempts++;
+          continue;
+        }
       }
+
+      if (direction === "horizontal") {
+        if (x + length > 10) {
+          attempts++;
+          continue;
+        }
+
+        let isValidPlacement = true;
+        for (let i = 0; i < length; i++) {
+          const key = `${x + i},${y}`;
+          if (this.shipLocations.has(key)) {
+            isValidPlacement = false;
+            break;
+          }
+          proposedCoords.push(key);
+        }
+
+        if (!isValidPlacement) {
+          attempts++;
+          continue;
+        }
+      }
+
+      const ship = new Ship(length);
+
+      proposedCoords.forEach((key) => this.shipLocations.set(key, ship));
+      return true;
     }
 
-    if (direction === "horizontal") {
-      for (let i = 0; i < length; i++) {
-        const key = `${x + i},${y}`;
-        if (this.shipLocations.has(key)) return false; // Prevent overlapping
-        proposedCoords.push(key);
-      }
-    }
-
-    // If no overlaps, place the ship
-    proposedCoords.forEach((key) => this.shipLocations.set(key, ship));
-
-    return true;
+    return false;
   }
 
   receiveAttack(attackCoord) {
