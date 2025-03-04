@@ -48,6 +48,13 @@ export const listener = {
       addElement.addGrid(100, elements.player1GridTarget);
       addElement.addGrid(100, elements.player2GridTarget);
 
+      //Change Player Turn Text to First Player
+      elements.player1TurnText.style.display = "block";
+      textManipulation.changeText(
+        elements.player1TurnText,
+        `${elements.player1Name}'s turn!`
+      );
+
       // Initialize game and place ships AFTER grids are created
       const game = initGame();
       place.ships(game.player1Board, game.player2Board);

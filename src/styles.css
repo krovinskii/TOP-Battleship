@@ -251,3 +251,10 @@ dialog::backdrop {
 .ship-cell {
   background-color: #000000;
 }
+.player1Turn,
+.player2Turn {
+  display: none;
+  font-size: 2rem;
+  color: #001b66;
+  margin: -1rem;
+}
