@@ -251,6 +251,9 @@ dialog::backdrop {
 .ship-cell {
   background-color: #000000;
 }
+.hit-cell {
+  background-color: red;
+}
 .player1Turn,
 .player2Turn {
   display: none;

@@ -73,3 +73,9 @@ export const place = {
     });
   },
 };
+export const attackDOM = (location) => {
+  //Records attack in DOM
+  //Used in eventListener and gameLogic
+  //location should be the element in domElements.js
+  location.className = "hit-cell";
+};
