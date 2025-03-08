@@ -6,24 +6,133 @@
     <title>Battleship</title>
   <script defer src="main.js"></script></head>
   <body>
-    <div class="startPageContainer">
-      <img alt="battleship picture" />
-      <div class="startPageText"></div>
+    <div class="startPageContainer" id="startPageContainer">
+      <img alt="battleship picture" src="1ea361862988c72e491e.webp" />
+      <div class="startPageText">BattleShip</div>
       <div class="player1">
-        <input type="text" id="player1Name" />
         <label for="player1Name">Player 1</label>
+        <input type="text" id="player1Name" />
       </div>
       <div class="player2">
-        <input type="text" id="player2Name" />
         <label for="player2Name">Player 2</label>
-        <input type="checkbox" id="player2Human" />
-        <label for="player2Human">Human</label>
-        <input type="checkbox" id="player2AI" />
-        <label for="player2AI">AI</label>
+        <input type="text" id="player2Name" class="player2NameInput" />
+        <div class="checkboxContainer">
+          <input type="checkbox" id="player2Human" />
+          <label class="player2Human" for="player2Human">Human</label>
+          <input type="checkbox" id="player2AI" />
+          <label for="player2AI">AI</label>
+        </div>
       </div>
-      <div class="Btns">
-        <button class="startGameBtn">Play</button>
-        <button class="instructionsBtn">How to Play?</button>
+      <div class="btns" id="btns">
+        <button class="startGameBtn button-26" id="playGameBtn">Play</button>
+        <!--Instructions-->
+        <dialog id="instructionsModal">
+          <ol>
+            <li>
+              <strong>Step 1:</strong> Enter Player Names & Select Opponent Type
+              <ul>
+                <li>Player 1 enters their name.</li>
+                <li>Player 2's type is selected: either "Human" or "AI".</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 2:</strong> Press Play
+              <ul>
+                <li>
+                  After entering player names and selecting the opponent type,
+                  the user presses the “Play” button to start the game.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 3:</strong> Place Ships on the Grid
+              <ul>
+                <li>
+                  Each player places their ships on their gameboard. The ships
+                  can be placed either manually by dragging them onto the grid
+                  or automatically with random placement.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 4:</strong> Start the Game
+              <ul>
+                <li>
+                  The game begins with Player 1 taking the first turn. Player 1
+                  selects a coordinate on the opponent's grid to attack.
+                </li>
+                <li>
+                  The opponent (either AI or Player 2) responds based on their
+                  turn.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 5:</strong> Track Hits and Misses
+              <ul>
+                <li>
+                  Players take turns attacking each other's grid. If a ship is
+                  hit, the grid will update to reflect the hit. Misses will be
+                  marked on the grid as well.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 6:</strong> Check for Sunk Ships
+              <ul>
+                <li>
+                  As the game progresses, players will check if they've sunk any
+                  ships. A ship is considered sunk when all its segments are
+                  hit. The game will notify the player when this happens.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Step 7:</strong> Declare the Winner
+              <ul>
+                <li>
+                  The game ends when one player successfully sinks all of their
+                  opponent's ships. The winner is declared, and the player is
+                  given an option to restart or end the game.
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <button class="instructionsBtn" id="modalExitBtn">Exit</button>
+        </dialog>
+        <button class="instructionsBtn" id="instructionsBtn">
+          How to Play?
+        </button>
+      </div>
+    </div>
+    <!--Game Screen-->
+    <div class="gameContainer" id="gameContainer">
+      <div class="gameHeader">
+        <div class="gameHeaderText">
+          <h1 class="battleshipFont">BattleShip</h1>
+        </div>
+      </div>
+      <div class="gameBoards">
+        <div class="board1" id="playerBoard">
+          <!--Dynamically load 100 grids here with JS-->
+        </div>
+        <div class="player1Turn" id="playerTurnText"></div>
+        <div class="player2Turn" id="secondPlayerTurnText"></div>
+        <div class="board2" id="secondBoard">
+          <!--Dynamically load 100 grids here with JS-->
+        </div>
+      </div>
+      <div class="gameInfo">
+        <div class="player1Info">
+          <div class="player1Name" id="player1NameGameScreen">Player 1</div>
+          <div class="playerGameInfo" id="player1Hits">Hits:</div>
+          <div class="playerGameInfo" id="player1Misses">Misses:</div>
+        </div>
+        <div class="player2Info">
+          <div class="player2Name" id="player2NameGameScreen">Player 2</div>
+          <div class="playerGameInfo" id="player2Hits">Hits:</div>
+          <div class="playerGameInfo" id="player2Misses">Misses:</div>
+        </div>
       </div>
     </div>
   </body>
