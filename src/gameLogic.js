@@ -5,6 +5,7 @@ import { Ship } from "./classes";
 import { shipArray } from "./shipSizes";
 import { randomizeDirection } from "./randomizeXY";
 import { attackDOM } from "./domManipulation";
+import { elements } from "./domElements";
 
 let currentGame = null;
 
@@ -33,6 +34,15 @@ export const initGame = (player1, player2) => {
 
 export const clickAttack = (currentPlayer, opponentPlayer) => {
   return (event) => {
+    // Check if it's the AI's turn - if so, don't allow player clicks
+    if (
+      currentPlayer !== currentGame.player1Board &&
+      opponentPlayer.type === "ai"
+    ) {
+      console.log("Not your turn!");
+      return false;
+    }
+
     const coords = event.target.id.split(",").map(Number);
 
     if (
@@ -47,39 +57,59 @@ export const clickAttack = (currentPlayer, opponentPlayer) => {
     if (hitSuccessful) {
       event.target.classList.add("hit-cell");
       event.target.style.backgroundColor = "#f55";
+      if (currentPlayer === currentGame.player1Board) {
+        // Player 1 got a hit
+        const currentHits = parseInt(
+          elements.player1Hits.innerText.split(":")[1].trim() || "0"
+        );
+        elements.player1Hits.innerText = `Hits: ${currentHits + 1}`;
+      } else {
+        // Player 2 got a hit
+        const currentHits = parseInt(
+          elements.player2Hits.innerText.split(":")[1].trim() || "0"
+        );
+        elements.player2Hits.innerText = `Hits: ${currentHits + 1}`;
+      }
 
+      // If it's a hit, player gets another turn - don't change turn text
       return true;
     } else {
+      // Miss - switch turns
       event.target.classList.add("miss-cell");
       event.target.style.backgroundColor = "#aaa";
-
-      const player1Name = document.getElementById("player1Name");
-      const player2Name = document.getElementById("player2Name");
-
       if (currentPlayer === currentGame.player1Board) {
-        if (document.getElementById("player1TurnText")) {
-          document.getElementById("player1TurnText").style.display = "none";
-        }
-        if (document.getElementById("player2TurnText")) {
-          document.getElementById("player2TurnText").style.display = "block";
-          document.getElementById(
-            "player2TurnText"
-          ).innerText = `${player2Name.value}'s turn!`;
-        }
+        // Player 1 got a miss
+        const currentMisses = parseInt(
+          elements.player1Misses.innerText.split(":")[1].trim() || "0"
+        );
+        elements.player1Misses.innerText = `Misses: ${currentMisses + 1}`;
+      } else {
+        // Player 2 got a miss
+        const currentMisses = parseInt(
+          elements.player2Misses.innerText.split(":")[1].trim() || "0"
+        );
+        elements.player2Misses.innerText = `Misses: ${currentMisses + 1}`;
+      }
+      if (currentPlayer === currentGame.player1Board) {
+        // Player 1 just missed, switch to Player 2/AI's turn
+        elements.player1TurnText.style.display = "none";
+        elements.player2TurnText.style.display = "block";
+        elements.player2TurnText.innerText = `${elements.player2Name}'s turn!`;
+
+        // Disable player board for interaction
+        disablePlayerInteraction();
 
         if (opponentPlayer.type === "ai") {
           setTimeout(() => makeAIMove(opponentPlayer, currentPlayer), 1000);
         }
       } else {
-        if (document.getElementById("player2TurnText")) {
-          document.getElementById("player2TurnText").style.display = "none";
-        }
-        if (document.getElementById("player1TurnText")) {
-          document.getElementById("player1TurnText").style.display = "block";
-          document.getElementById(
-            "player1TurnText"
-          ).innerText = `${player1Name.value}'s turn!`;
-        }
+        // Player 2/AI just missed, switch to Player 1's turn
+        elements.player2TurnText.style.display = "none";
+        elements.player1TurnText.style.display = "block";
+        elements.player1TurnText.innerText = `${elements.player1Name}'s turn!`;
+
+        // Enable player board for interaction
+        enablePlayerInteraction();
       }
 
       return false;
@@ -88,9 +118,14 @@ export const clickAttack = (currentPlayer, opponentPlayer) => {
 };
 
 const makeAIMove = (aiPlayer, humanPlayer) => {
+  // Make sure we're visually showing it's the AI's turn
+  elements.player1TurnText.style.display = "none";
+  elements.player2TurnText.style.display = "block";
+  elements.player2TurnText.innerText = `${elements.player2Name}'s turn!`;
+
   let validMove = false;
   let attempts = 0;
-  const maxAttempts = 100; // Prevent infinite loops
+  const maxAttempts = 100;
 
   while (!validMove && attempts < maxAttempts) {
     attempts++;
@@ -110,20 +145,27 @@ const makeAIMove = (aiPlayer, humanPlayer) => {
         cellElement.classList.add("hit-cell");
         cellElement.style.backgroundColor = "#f55";
 
+        const currentHits = parseInt(
+          elements.player2Hits.innerText.split(":")[1].trim() || "0"
+        );
+        elements.player2Hits.innerText = `Hits: ${currentHits + 1}`;
+        // Hit successful - AI gets another turn
         setTimeout(() => makeAIMove(aiPlayer, humanPlayer), 1000);
       } else {
+        // AI missed - switch to player's turn
         cellElement.classList.add("miss-cell");
         cellElement.style.backgroundColor = "#aaa";
 
-        if (document.getElementById("player2TurnText")) {
-          document.getElementById("player2TurnText").style.display = "none";
-        }
-        if (document.getElementById("player1TurnText")) {
-          document.getElementById("player1TurnText").style.display = "block";
-          document.getElementById("player1TurnText").innerText = `${
-            document.getElementById("player1Name").value
-          }'s turn!`;
-        }
+        const currentMisses = parseInt(
+          elements.player2Misses.innerText.split(":")[1].trim() || "0"
+        );
+
+        elements.player2Misses.innerText = `Misses: ${currentMisses + 1}`;
+        elements.player2TurnText.style.display = "none";
+        elements.player1TurnText.style.display = "block";
+        elements.player1TurnText.innerText = `${elements.player1Name}'s turn!`;
+
+        enablePlayerInteraction();
       }
 
       validMove = true;
@@ -131,6 +173,19 @@ const makeAIMove = (aiPlayer, humanPlayer) => {
   }
 };
 
+function disablePlayerInteraction() {
+  const opponentBoard = elements.player2GridTarget;
+  if (opponentBoard) {
+    opponentBoard.style.pointerEvents = "none";
+  }
+}
+
+function enablePlayerInteraction() {
+  const opponentBoard = elements.player2GridTarget;
+  if (opponentBoard) {
+    opponentBoard.style.pointerEvents = "auto";
+  }
+}
 const disableAttacks = () => {
   const allCells = document.querySelectorAll(".gridCell");
   allCells.forEach((cell) => {
@@ -141,4 +196,6 @@ const disableAttacks = () => {
 export const gameHelpers = {
   makeAIMove,
   disableAttacks,
+  disablePlayerInteraction,
+  enablePlayerInteraction,
 };

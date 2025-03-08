@@ -54,11 +54,11 @@ export const listener = {
       addElement.addGrid(100, elements.player2GridTarget);
 
       //Change Player Turn Text to First Player
-      elements.player1TurnText.style.display = "block";
+      /*elements.player1TurnText.style.display = "block";
       textManipulation.changeText(
         elements.player1TurnText,
         `${player1Name.value}'s turn!`
-      );
+      );*/
 
       // Get player 2 type (human or AI)
       const player2Type = document.getElementById("player2AI").checked

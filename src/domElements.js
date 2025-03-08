@@ -25,6 +25,10 @@ export const elements = {
   player2GridTarget: document.getElementById("secondBoard"),
   player1TurnText: document.getElementById("playerTurnText"),
   player2TurnText: document.getElementById("secondPlayerTurnText"),
+  player1Hits: document.getElementById("player1Hits"),
+  player1Misses: document.getElementById("player1Misses"),
+  player2Hits: document.getElementById("player2Hits"),
+  player2Misses: document.getElementById("player2Misses"),
   //-----------------------------------------------//
   //-----------------Grid Elements-------------------//
   grid00: document.getElementById("0,0"),
